@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript and Ajax Programming">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Aakash Khalasi">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript/Ajax Programming Homework 2 Extra Credit</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        input:focus {
+            background-color: lightyellow;
+        }
+    </style>
+    <script>
+function convertCurrency() {
+            const usdAmount = document.getElementById('usd').value.trim();
+            
+            // If the input field is empty, clear all values
+            if (usdAmount === "") {
+                clearValues();
+                return;
+            }
+
+            const usd = parseFloat(usdAmount);
+            if (isNaN(usd)) {
+                alert("Please enter a valid number");
+                clearValues();
+                return;
+            }
+
+            const rates = {
+                Euro: 0.92,
+                CanadianDollar: 1.38,
+                HongKongDollar: 7.81,
+                JapaneseYen: 156.73,
+                MexicanPeso: 18.41
+            };
+
+            // Loop through each currency and update its corresponding input field
+            for (const [currency, rate] of Object.entries(rates)) {
+                const value = (usd * rate).toFixed(2);
+                document.getElementById(currency).value = value;
+            }
+        }
+
+        // Function to clear all table values
+        function clearValues() {
+            const currencyIds = ['Euro', 'CanadianDollar', 'HongKongDollar', 'JapaneseYen', 'MexicanPeso'];
+            currencyIds.forEach(id => document.getElementById(id).value = '');
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>
+            Extra Credit - Currency Calculator
+        </h1>
+    </header>
+    <div class = "content">
+        <table>
+            <tr>
+                <th>Currency</th>
+                <th>Rate</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Euro</td>
+                <td>0.92</td>
+                <td><input type="text" id="Euro" readonly></td>
+            </tr>
+            <tr>
+                <td>Canadian Dollar</td>
+                <td>1.38</td>
+                <td><input type="text" id="CanadianDollar" readonly></td>
+            </tr>
+            <tr>
+                <td>Hong Kong Dollar</td>
+                <td>7.81</td>
+                <td><input type="text" id="HongKongDollar" readonly></td>
+            </tr>
+            <tr>
+                <td>Japanese Yen</td>
+                <td>156.73</td>
+                <td><input type="text" id="JapaneseYen" readonly></td>
+            </tr>
+            <tr>
+                <td>Mexican Peso</td>
+                <td>18.41</td>
+                <td><input type="text" id="MexicanPeso" readonly></td>
+            </tr>
+        </table>
+            <p>Enter Amount of U.S. Dollars: <input type="text" id="usd" oninput="convertCurrency()"></p>
+    </div>
+    
+    <a href="hw2.html">Back to Homework 2 Main Page</a>
+    <footer>
+        <a>&copy;Aakash Khalasi, College of San Mateo 2024</a>
+    </footer>
+</body>
+</html>

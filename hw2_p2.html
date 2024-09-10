@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript and Ajax Programming">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Aakash Khalasi">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript/Ajax Programming Homework 2 Part 2</title>
+    <script>
+        function processNumbers() {
+            const num1 = parseInt(document.getElementById('num1').value);
+            const num2 = parseInt(document.getElementById('num2').value);
+            const num3 = parseInt(document.getElementById('num3').value);
+            
+            if (isNaN(num1) || isNaN(num2) || isNaN(num3)) {
+                document.getElementById('results').textContent = 'Please enter valid numbers.';
+                return;
+            }
+            
+            const sum = num1 + num2 + num3;
+            const avg = sum / 3;
+            const product = num1 * num2 * num3;
+            const smallest = Math.min(num1, num2, num3);
+            const largest = Math.max(num1, num2, num3);
+
+            document.getElementById('results').textContent = `Sum: ${sum}, Average: ${avg.toFixed(2)}, Product: ${product}, Smallest: ${smallest}, Largest: ${largest}`;
+        }
+
+        function clearForm() {
+            document.getElementById('num1').value = '';
+            document.getElementById('num2').value = '';
+            document.getElementById('num3').value = '';
+            document.getElementById('results').textContent = '';
+        }
+    </script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <h1>Part 2 - Form to Process Integers</h1>
+    </header>
+    <div class="content">
+        <form>
+            <input type="text" id="num1" placeholder="Enter first integer">
+            <input type="text" id="num2" placeholder="Enter second integer">
+            <input type="text" id="num3" placeholder="Enter third integer">
+            <button type="button" onclick="processNumbers()">Process</button>
+            <button type="button" onclick="clearForm()">Clear</button>
+        </form>
+
+    
+    <p id="results"></p>
+    </div>
+    <a href="hw2.html">Back to Homework 2 Main Page</a>
+    <footer>
+        <a>&copy;Aakash Khalasi, College of San Mateo 2024</a>
+    </footer>
+</body>
+
+</html>
