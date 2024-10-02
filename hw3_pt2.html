@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript and Ajax Programming">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Aakash Khalasi">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Salesperson Commission</title>
+    <script>
+        function calculateEarnings() {
+            // Prices of the items
+            const prices = [20.99, 12.75, 9.95, 35.89];
+
+            // Get salesperson name and quantities sold
+            let salesperson = document.getElementById('salesperson').value;
+            let quantities = [
+                parseInt(document.getElementById('item1').value),
+                parseInt(document.getElementById('item2').value),
+                parseInt(document.getElementById('item3').value),
+                parseInt(document.getElementById('item4').value)
+            ];
+
+            // Validate input
+            if (salesperson === "" || quantities.some(qty => isNaN(qty) || qty < 0)) {
+                document.getElementById('result').innerText = "Error: Please enter valid input.";
+                return;
+            }
+
+            // Calculate total sales and commission
+            let totalSales = quantities.reduce((sum, qty, index) => sum + (qty * prices[index]), 0);
+            let earnings = 250 + (0.09 * totalSales);
+
+            // Display results
+            document.getElementById('totalSales').value = totalSales.toFixed(2);
+            document.getElementById('totalEarnings').value = earnings.toFixed(2);
+        }
+
+        function clearForm() {
+            document.getElementById('salesForm').reset();
+            document.getElementById('totalSales').value = "";
+            document.getElementById('totalEarnings').value = "";
+            document.getElementById('result').innerText = "";
+        }
+    </script>
+</head>
+<body>
+    <h1>Salesperson Commission</h1>
+    <form id="salesForm">
+        Salesperson Name: <input type="text" id="salesperson"><br><br>
+        Item 1 Sold (20.99): <input type="number" id="item1"><br><br>
+        Item 2 Sold (12.75): <input type="number" id="item2"><br><br>
+        Item 3 Sold (9.95): <input type="number" id="item3"><br><br>
+        Item 4 Sold (35.89): <input type="number" id="item4"><br><br>
+        <button type="button" onclick="calculateEarnings()">Calculate</button>
+        <button type="button" onclick="clearForm()">Clear</button>
+    </form>
+    <h3>Results</h3>
+    Total Sales: <input type="text" id="totalSales" readonly><br><br>
+    Total Earnings: <input type="text" id="totalEarnings" readonly><br><br>
+    <a href="index.html">Back to Homework 3 Main Page</a>
+</body>
+</html>
