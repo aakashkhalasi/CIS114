@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang = en>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript and Ajax Programming">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Aakash Khalasi">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .result {
+            margin-top: 20px;
+            font-family: monospace;
+            white-space: pre; /* Ensures formatting of the square with spaces */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Extra Credit</h1>
+    </header>
+    <main class="content">
+        <form id="squareForm">
+            <label for="numberInput">Enter a number between 2 and 10</label>
+            <input type="number", id="numberInput", min="2", max="10">
+            <button type="button" onclick="generateBox()">Confirm</button>
+            <button type="button" onclick="clearForm()">Clear</button>
+        </form>
+
+        <div id="result" class="result"></div>
+    </main>
+        <script>
+            function generateBox(){
+                const numInput = document.getElementById("numberInput").value;
+                const output = document.getElementById("result");
+                let n = parseInt(numInput);
+
+                //clear previous result
+                output.innerHTML = ''; 
+
+                //validate
+                if (isNaN(n) || n < 2 || n > 10 ){
+                    output.innerHTML = '<p class="error"> Please enter a number between 2 and 10. </p>';
+                    return;
+                }
+
+                let square = '';
+
+                //top row
+                square += '* '.repeat(n) + '\n';
+
+                //middle rows
+                for (let i = 0; i < n - 2; i++) {
+                    square += '* ' + '  '.repeat(n - 2) + '*\n';
+                }
+
+                //bottom row
+                if (n > 1) {
+                    square += '* '.repeat(n) + '\n';
+                }
+
+                //display hollow square
+                output.textContent = square;
+            }
+
+            function clearForm() {
+                document.getElementById("numberInput").value = '';
+                document.getElementById("result").innerHTML = '';
+            }
+
+        </script>
+        <a href="hw4.html">Back to Homework 4 Main Page</a>
+    <footer>
+        <a>&copy;Aakash Khalasi, College of San Mateo 2024</a>
+    </footer>
+</body>
+</html>
