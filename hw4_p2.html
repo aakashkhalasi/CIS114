@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang = en>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript and Ajax Programming">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Aakash Khalasi">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Homework 4 - Learn About Compound Interest</title>
+    <style>
+        table {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Part 2 - Learn About Compound Interest</h1>
+    </header>
+    <main class="content">
+        <div id="table5"></div>
+        <div id="table6"></div>
+        <div id="table7"></div>
+
+    </main>
+    <a href="hw4.html">Back to Homework 4 Main Page</a>
+    <script>
+        function compoundInterestTable(rate, elementId){
+            const principal = 1000;
+            const years = 5;
+
+            let tableHTML=`
+                <table>
+                    <th>Year</th>
+                    <th>Amount on Deposit</th>
+                    <th>Interest Rate</th>
+            `;
+
+            for (let year = 1; year <= years; year++){
+                amount = principal * Math.pow(1 + rate, year);
+                tableHTML += `
+                <tr>
+                    <td>${year}</td>
+                    <td>${amount.toFixed(2)}</d>
+                    <td>${rate}</td>
+                </tr>
+                `;
+            }
+
+            tableHTML += `
+                </table>
+            `;
+
+            document.getElementById(elementId).innerHTML = tableHTML;
+
+        }
+            compoundInterestTable(0.05, "table5");
+            compoundInterestTable(0.06, "table6");
+            compoundInterestTable(0.07, "table7");
+    </script>
+    <footer>
+        <a>&copy;Aakash Khalasi, College of San Mateo 2024</a>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang = en>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript and Ajax Programming">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Aakash Khalasi">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 4 - Looping Statements</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <h1>Part 1 - Looping Statements</h1>
+    </header>
+ 
+    <main class = "content">
+    <h2>For Loop: The sum and product of every 4th integer from 5 to 25</h2>
+    <div id="for-loop-results" class="results"></div>
+
+    <h2>While Loop: The sum and product of every 3rd integer from 3 to 18</h2>
+    <div id="while-loop-results" class="results"></div>
+
+    <script>
+        let arrayFor = [];
+        let sumForLoop = 0; //instantiate variable for sum
+        let productForLoop = 1; //instantiate variable for product
+        for(let i = 5; i <= 25; i += 4){
+            arrayFor.push(i);
+            sumForLoop += i;
+            productForLoop *= i;
+        }
+
+        let forLoopResults = document.getElementById("for-loop-results");
+        forLoopResults.innerHTML = `
+            <p>The result of ${arrayFor.join(' + ')} is ${sumForLoop.toLocaleString()}</p>
+            <p>The result of ${arrayFor.join(' * ')} is ${productForLoop.toLocaleString()}</p>
+        `;
+
+        let arrayWhile = [];
+        let sumWhileLoop = 0;
+        let productWhileLoop = 1;
+        let j = 3;
+        while (j <= 18){
+            arrayWhile.push(j);
+            productWhileLoop *= j;
+            sumWhileLoop += j;
+            j += 3;
+        }
+
+        let whileLoopResults = document.getElementById("while-loop-results");
+        whileLoopResults.innerHTML = `
+            <p>The result of ${arrayWhile.join(' + ')} is ${sumWhileLoop.toLocaleString()}</p>
+            <p>The result of ${arrayWhile.join(' * ')} is ${productWhileLoop.toLocaleString()}</p>
+        `;
+    </script>
+
+    <a href="hw4.html">Back to Homework 4 Main Page</a>
+    </main>
+    <footer>
+        <a>&copy;Aakash Khalasi, College of San Mateo 2024</a>
+    </footer>
+</body>
+
+</html>
