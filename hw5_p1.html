@@ -12,19 +12,19 @@
         function validateForm() {
 
             //get the input field for the name
-            let name = document.getElementById('name').value;
+            const nameInput = document.getElementById('name').value;
 
             //create an array of the radio buttons for age group by selecting all with name "age"
-            let ageGroup = Array.from(document.querySelectorAll('input[name="age"]'));
+            const ageGroupRadios = Array.from(document.querySelectorAll('input[name="ageGroup"]'));
 
             //create an array of the checkboxes for browser choices by selecting all with name "browser"
-            let browser = Array.from(document.querySelectorAll('input[name="browser"]'));
+            const browserCheckboxes = Array.from(document.querySelectorAll('input[name="browser"]'));
 
             //get the select dropdown for a movie genre
-            let movieSelect = document.getElementById('movie');
+            const movieSelect = document.getElementById('movie');
 
             //get the output area where validation messages or success message will be displayed
-            let output = document.getElementById('output');
+            const output = document.getElementById('output');
 
             //clear the output area before any new messages are added
             output.innerHTML = '';
@@ -32,8 +32,8 @@
             //initialize a flag to track if trhere are any validation errors
             let hasErrors = false;
 
-            //validate the name - check if the input is empy after trimming whitespace
-            if (!nameInput.value.trim()){
+            //validate the name - check if the input is empty
+            if (!nameInput.trim()){
 
                 //if empty, add an error to the output
                 output.innerHTML += "<p>Please enter your full name.</p>";
@@ -42,28 +42,30 @@
                 hasErrors = true;
             }
 
-            let age = ageGroup.some(radio => radio.checked);
+            // Validate age group: use some() to check if at least one radio button is selected
+            const ageGroupSelected = ageGroupRadios.some(radio => radio.checked);
 
-            if (!age) {
-                output.innerHTML += "<p>Please select your age group.</p>"
+            if (!ageGroupSelected) {
+                output.innerHTML += "<p>Please select your age group.</p>";
                 hasErrors = true;
             }
 
-            let browsers = browser.some(checkbox => checkbox.checked);
+            // Validate browser checkboxes: use some() to check if at least one checkbox is selected
+            const browserSelected = browserCheckboxes.some(checkbox => checkbox.checked);
 
-            if (!browsers) {
-                output.innerHTML += "<p> Please select at least one browser</p>"
+            if (!browserSelected) {
+                output.innerHTML += "<p> Please select at least one browser</p>";
                 hasErrors = true;
             }
 
-            if (!movieSelect) {
-                output.innerHTML += "<p>Please select your favorite movie genre.</p>"
+            if (!movieSelect.value) {
+                output.innerHTML += "<p>Please select your favorite movie genre.</p>";
                 hasErrors = true;
             }
 
             //if there are no errors, show a success message in the output area
             if (!hasErrors) {
-                output.innerHTML = "<p>Thanks, your data was submitted!</p>"
+                output.innerHTML = "<p>Thanks, your data was submitted!</p>";
             }
         }
 
@@ -74,20 +76,19 @@
         <h1>Part 1 - Form with Validation</h1>
     </header>
     <main class = "content">
-        <div>
             <form onsubmit="validateForm(); return false;">
-                <label for="fullName">Full Name: <input type="text" id="name"></label>
+                <label>Full Name: <input type="text" id="name"></label><br>
 
-                <label>Age Group:</label>
-                <label for="age1"><input type="radio" id="age1" name="ageGroup" value="under21"/>Under 21</label><br>
-                <label for="age2"><input type="radio" id="age2" name="ageGroup" value="21to50"/>21 to 50</label><br>
-                <label for="age3"><input type="radio" id="age3" name="ageGroup" value="over50"/>Over 50</label><br>
+                <label>Age Group:</label><br>
+                <label><input type="radio" name="ageGroup" value="under21"/>Under 21</label><br>
+                <label><input type="radio" name="ageGroup" value="21to50"/>21 to 50</label><br>
+                <label><input type="radio" name="ageGroup" value="over50"/>Over 50</label><br>
 
-                <label>Browser used:</label>
-                <label for="browser"><input type ="checkbox" name="browser" value="Firefox"/>Firefox</label>
-                <label for="browser"><input type ="checkbox" name="browser" value="Edge"/>Edge</label>
-                <label for="browser"><input type ="checkbox" name="browser" value="Chrome"/>Chrome</label>
-                <label for="browser"><input type ="checkbox" name="browser" value="Safari"/>Safari</label>
+                <label>Browsers used:</label><br>
+                <label><input type ="checkbox" name="browser" value="Firefox"/>Firefox</label><br>
+                <label><input type ="checkbox" name="browser" value="Edge"/>Edge</label><br>
+                <label><input type ="checkbox" name="browser" value="Chrome"/>Chrome</label><br>
+                <label><input type ="checkbox" name="browser" value="Safari"/>Safari</label><br>
 
                 <label for="movieID">Favorite Movie Genre:
                     <select id="movie">
@@ -103,7 +104,6 @@
                 <button type="button" onclick="validateForm()">Submit</button>
                 <button type="reset">Clear</button>
             </form>
-        </div>
         <div id="output"></div>
     <a href="hw5.html">Return to Homework 5 Main Page</a>
     </main>
