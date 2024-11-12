@@ -1,0 +1,80 @@
+!DOCTYPE html>
+<html lang = en>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript and Ajax Programming">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Aakash Khalasi">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 5 - Arrays</title>
+    <link rel="stylesheet" href="index.css">
+    <script>
+        //array of arrys storing state data: abbreviation, name, capital, population
+        const statesData = [
+            ["AL","Alabama","Montgomery","4,903,185"],
+            ["AK","Alaska","Juneau","731,545"],
+            ["AZ","Arizona","Phoenix","3,017,825"],
+            ["AR","Arkansas","Little Rock","3,017,825"],
+            ["CA","California","Sacramento","39,512,223"],
+            ["CO","Colorado","Denver","5,758,736"]
+        ];
+        //function to search for a state by name or abbreviation
+        function getStatesInfo() {
+            //get the user input and convert it to uppercase to make search case-insensitive
+            const userInput = document.getElementById('stateInput').value.trim().toUpperCase();
+
+            //output area where results or error messages will be displayed
+            const output = document.getElementById('output');
+
+            //clear any previous output messages
+            output.innerHTML = "";
+
+            //validate user input to check if it's empty
+            if (!userInput) {
+                output.innerHTML = "<p>Please enter a state name or abbreviation.</p>";
+                return;
+            }
+
+            //search for the state in statesData array
+            const stateInfo = statesData.find(state =>
+                state[0] === userInput || state[1].toUpperCase() === userInput
+            );
+
+            //display results or error message based on search outcome
+            if (stateInfo) {
+                //state found; display its information
+                output.innerHTML = `<p>Thanks for your inquiry, her is the information you requested:</p>
+                                    <p>State Abbr = ${stateInfo[0]}</p>
+                                    <p>State name = ${stateInfo[1]}</p
+                                    <p>Capital = ${stateInfo[2]}</p>
+                                    <p>Population = ${stateInfo[3]}</p>`;
+            } else {
+                //states not found; display error message with a list of available states
+                const availableStates = statesData.map(state => `${state[1]} (${state[0]})`).join(', ');
+                output.innerHTML = `<p>Sorry, we do not have information about this state! We only have information about: ${availableStates}</p>`;
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>State Information Look-Up</h1>
+    </header>
+    <main class="content">
+        <div id="textForm">
+            <form onsubmit="getStatesInfo(); return false;">
+                <label for="stateInput">Enter State Name or Abbreviation:</label>
+                <input type="text" id="stateInput" placeholder="e.g., California or CA">
+
+                <button type="submit" onclick="getStateInfo()">Get State Info</button>
+                <button type="reset">Clear</button>
+            </form>
+        </div>
+        <div id="output"></div>
+        <a href="hw5.html">Return to Homework 5 Main Page</a>
+    </main>
+    <footer>
+        <a>&copy;Aakash Khalasi, College of San Mateo 2024</a>
+    </footer>
+</body>
+</html>

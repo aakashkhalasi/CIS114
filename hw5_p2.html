@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang = en>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript and Ajax Programming">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Aakash Khalasi">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 5 - Arrays</title>
+    <link rel="stylesheet" href="index.css">
+    <script>
+        function setupMenus(){
+            const menu1Urls = [
+                "https://www.google.com",
+                "https://www.wikipedia.org",
+                "https://www.facebook.com"
+            ];
+            const menu2Urls = [
+                "https://www.bing.com",
+                "https://www.yahoo.com",
+                "https://www.youtube.com"
+            ];
+
+            document.getElementById("menu1").onchange = function() {
+                const selectedIndex = this.selectedIndex;
+                if (selectedIndex > 0) {
+                    window.open(menu1Urls[selectedIndex - 1], "_blank");
+                }
+            };
+
+            document.getElementById("menu2Button").onclick = function() {
+                const menu2 = document.getElementById("menu2");
+                const selectedIndex = menu2.selectedIndex;
+                if (selectedIndex > 0) {
+                    window.open(menu2Urls[selectedIndex - 1], "_blank");
+                }
+            };
+        }
+
+        window.onload = setupMenus;
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Pull-Down Menus</h1>
+    </header>
+    <main class="content">
+
+        <label for="menu1">Choose a website (onchange):</label>
+        <select id="menu1">
+            <option value="">select...</option>
+            <option value="1">Google</option>
+            <option value="2">Wikipedia</option>
+            <option value="3">Facebook</option>
+        </select><br>
+
+        <label for="menu2">Choose another website:</label>
+        <select id="menu2">
+            <option value="">select...</option>
+            <option value="a">Bing</option>
+            <option value="b">Yahoo</option>
+            <option value="v">YouTube</option>
+        </select>
+        <button id="menu2Button">Go</button><br>
+
+        <a href="hw5.html">Return to Homework 5 Main Page</a>
+    </main>
+    <footer>
+        <a>&copy;Aakash Khalasi, College of San Mateo 2024</a>
+    </footer>
+</body>
