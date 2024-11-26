@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript and Ajax Programming">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Aakash Khalasi">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Part 3 - Phone Number Validator</title>
+    <script>
+      const PhoneNumberValidator = {
+        phoneInput: null,
+        output: null,
+  
+        init() {
+          this.phoneInput = document.getElementById('phoneInput');
+          this.output = document.getElementById('output');
+          document.getElementById('validateButton').addEventListener('click', () => this.validatePhoneNumber());
+          document.getElementById('clearButton').addEventListener('click', () => this.clearForm());
+        },
+  
+        validatePhoneNumber() {
+          const phoneNumber = this.phoneInput.value;
+  
+          // Regular expression for (999) 999-9999 format
+          const phoneRegex = /^\(\d{3}\) \d{3}-\d{4}$/;
+  
+          if (phoneRegex.test(phoneNumber)) {
+            // Valid phone number
+            this.output.textContent = `Thank you for providing your phone number "${phoneNumber}". Our agents will contact you soon.`;
+            this.output.style.color = "green";
+          } else {
+            // Invalid phone number
+            this.output.textContent = `Invalid phone number format. Please enter a phone number in the format (999) 999-9999.`;
+            this.output.style.color = "red";
+          }
+        },
+  
+        clearForm() {
+          this.phoneInput.value = '';
+          this.output.textContent = '';
+        },
+      };
+  
+      // Initialize the PhoneNumberValidator object after the DOM is loaded
+      document.addEventListener('DOMContentLoaded', () => PhoneNumberValidator.init());
+    </script>
+  </head>
+  <body>
+    <h1>Part 3: Phone Number Validation</h1>
+    <main class = "content">
+        <form onsubmit="return false;">
+        <label for="phoneInput">Enter your phone number:</label>
+        <input type="text" id="phoneInput" placeholder="(999) 999-9999">
+        <button type="button" id="validateButton">Validate</button>
+        <button type="button" id="clearButton">Clear</button>
+        </form>
+        <div id="output"></div>
+        <a href="index.html">Back to Homework 6</a>
+    </main>
+    <footer>
+        <a>&copy;Aakash Khalasi, College of San Mateo 2024</a>
+    </footer>
+</body>
+</html>

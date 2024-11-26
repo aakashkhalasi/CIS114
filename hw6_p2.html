@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript and Ajax Programming">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Aakash Khalasi">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+  <title>Part 2 - Character Counter</title>
+  <script>
+    const CharacterCounter = {
+        contentElement: null,
+        charInputElement: null,
+        outputElement: null,
+
+        init() {
+            this.contentElement = document.getElementById('contentInput');
+            this.charInputElement = document.getElementById('charInput');
+            this.outputElement = document.getElementById('output');
+            document.getElementById('submitButton').addEventListener('click', () => this.processContent());
+            document.getElementById('clearButton').addEventListener('click', () => this.clearForm());
+        },
+
+        processContent() {
+            const content = this.contentElement.value;
+            const searchChar = this.charInputElement.value;
+
+            // Validate input
+            if (searchChar.length !== 1) {
+            this.outputElement.textContent = "Please enter a single character to search.";
+            return;
+            }
+
+            // Count occurrences of the character (case insensitive)
+            const regex = new RegExp(searchChar, 'gi'); // 'g' for global, 'i' for case-insensitive
+            const matches = content.match(regex);
+            const count = matches ? matches.length : 0;
+
+            // Display results or open a new window if no matches found
+            if (count > 0) {
+            this.outputElement.textContent = `The character "${searchChar}" appears ${count} times in the content.`;
+            } else {
+            this.openNoMatchWindow(searchChar);
+            this.outputElement.textContent = ''; // Clear previous result
+            }
+        },
+
+        openNoMatchWindow(searchChar) {
+            const newWindow = window.open('', '_blank', 'width=300,height=100');
+            newWindow.document.write(`
+            <p>Search character "${searchChar}" not found in the content you typed.</p>
+            <button onclick="window.close()">Close</button>
+            `);
+        },
+
+        clearForm() {
+            this.contentElement.value = '';
+            this.charInputElement.value = '';
+            this.outputElement.textContent = '';
+        },
+        };
+
+    // Initialize the CharacterCounter object after the DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => CharacterCounter.init());
+  </script>
+</head>
+<body>
+  <h1>Part 2: Character Counter</h1>
+    <main class="content">
+        <form onsubmit="return false;">
+            <label for="contentInput">Enter content:</label><br>
+            <textarea id="contentInput" rows="5" cols="50"></textarea><br>
+            <label for="charInput">Enter a single character to search:</label>
+            <input type="text" id="charInput" maxlength="1"><br>
+            <button type="button" id="submitButton">Submit</button>
+            <button type="button" id="clearButton">Clear</button>
+        </form>
+        <div id="output"></div>
+        <a href="hw6.html">Back to Homework 6</a>
+    </main>
+<footer>
+    <a>&copy;Aakash Khalasi, College of San Mateo 2024</a>
+</footer>
+</body>
+</html>
