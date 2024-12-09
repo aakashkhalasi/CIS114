@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" container="JavaScript and Ajax Programming">
+        <meta name="keywords" container="HTML, CSS, JavaScript">
+        <meta name="author" container="Aakash Khalasi">
+        <meta name="viewport" container="width=device-width, initial-scale=1.0">
+        <title>Javascript/Ajax Programming Homework 7</title>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <header>
+            <h1>JavaScript Cookies</h1>
+        </header>
+        <main class="content">
+            <div id="container"></div>
+        </main>
+
+        <a href="homework7.html">Back to Homework 7</a>
+
+        <footer>
+            <a>&copy;Aakash Khalasi, College of San Mateo 2024</a>
+        </footer>
+
+        <script>
+            // Helper function to get a cookie value
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+    
+            // Helper function to set a cookie
+            function setCookie(name, value) {
+                document.cookie = `${name}=${value}; path=/`;
+            }
+    
+            // Display the welcome message
+            function displayWelcomeMessage(name) {
+                const container = document.getElementById('container');
+                container.innerHTML = `<h1>Welcome Back, ${name}!</h1>`;
+            }
+    
+            // Display the form for the user to input their details
+            function displayUserForm() {
+                const container = document.getElementById('container');
+                container.innerHTML = `
+                    <form id="userForm">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required><br>
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" required><br>
+                        <button type="submit">Submit</button>
+                    </form>
+                `;
+    
+                document.getElementById('userForm').addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    const name = document.getElementById('name').value;
+                    const username = document.getElementById('username').value;
+    
+                    // Save cookies
+                    setCookie('name', name);
+                    setCookie('username', username);
+    
+                    // Refresh the page
+                    location.reload();
+                });
+            }
+    
+            // Main function to initialize the page
+            function initializePage() {
+                const userName = getCookie('name');
+                const userUsername = getCookie('username');
+    
+                if (userName && userUsername) {
+                    displayWelcomeMessage(userName);
+                } else {
+                    displayUserForm();
+                }
+            }
+    
+            initializePage();
+        </script>
+    </body>
+</html>

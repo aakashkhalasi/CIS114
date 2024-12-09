@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="JavaScript and Ajax Programming">
+        <meta name="keywords" content="HTML, CSS, JavaScript">
+        <meta name="author" content="Aakash Khalasi">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Javascript/Ajax Programming Homework 7</title>
+        <link rel="stylesheet" href="index.css">
+        <style>
+            .content-area {
+                padding: 20px;
+                border: 1px solid #ccc;
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Style Selection Page</h1>
+        </header>
+        <main class = "content">
+
+
+            <main class="content-area">
+                <p>Paragraph 1: This is some sample text.</p>
+                <p>Paragraph 2: This is another sample text.</p>
+                <p>Paragraph 3: Yet another piece of text here.</p>
+            </main>
+            <main class="form">
+                <form>
+                    Select Background Color <br>
+                    <label><input type="radio" name="bgColor" value="lightblue"> Light Blue</label><br>
+                    <label><input type="radio" name="bgColor" value="lightgreen"> Light Green</label><br>
+                    <br>
+                    Select Text Style <br>
+                    <label><input type="checkbox" name="textStyle" value="bold"> Bold</label><br>
+                    <label><input type="checkbox" name="textStyle" value="italic"> Italic</label><br>
+                    <label><input type="checkbox" name="textStyle" value="underline"> Underline</label><br>
+                    <br>
+                    Select Font Size <br>
+                    <select name="fontSize">
+                        <option value="100%">100%</option>
+                        <option value="120%">120%</option>
+                        <option value="150%">150%</option>
+                    </select>
+                </form>
+            </main>
+        </main>
+    
+    
+        <a href="homework7.html">Back to Homework 7</a>
+
+        <footer>
+            <a>&copy;Aakash Khalasi, College of San Mateo 2024</a>
+        </footer>
+
+            
+        <script>
+            const contentArea = document.querySelector('.content-area');
+    
+            // Apply background color
+            function applyBackgroundColor() {
+                document.querySelectorAll('input[name="bgColor"]').forEach(radio => {
+                    radio.addEventListener('change', (event) => {
+                        contentArea.style.backgroundColor = event.target.value;
+                    });
+                });
+            }
+    
+            // Apply text styles
+            function applyTextStyle(){
+                document.querySelectorAll('input ').forEach(checkbox => {
+                    checkbox.addEventListener('change', (event) => {
+                        const { value, checked } = event.target;
+                        if (checked) {
+                            contentArea.classList.add(value);
+                        } else {
+                            contentArea.classList.remove(value);
+                        }
+                    });
+                });
+            }
+    
+            // Apply font size
+            function applyFontSize(){
+                document.querySelector('select[name="fontSize"]').addEventListener('change', (event) => {
+                    contentArea.style.fontSize = event.target.value;
+                });
+        
+                // Add dynamic styles for text styles
+                const style = document.createElement('style');
+                style.innerHTML = `
+                    .bold { font-weight: bold; }
+                    .italic { font-style: italic; }
+                    .underline { text-decoration: underline; }
+                `;
+                document.head.appendChild(style);
+            }
+
+            function initializeStyles(){
+                applyBackgroundColor();
+                applyTextStyle();
+                applyFontSize();
+            }
+
+            initializeStyles();
+        </script>
+    </body>
+</html>
