@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="JavaScript and Ajax Programming">
+  <meta name="keywords" content="HTML, CSS, JavaScript">
+  <meta name="author" content="Aakash Khalasi">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Javascript/Ajax Programming Homework 8</title>
+  <link rel="stylesheet" href="index.css">
+  <style>
+    table,th,td {
+      border : 1px solid black;
+      border-collapse: collapse;
+    }
+    th,td {
+      padding: 5px;
+    }
+    </style>
+</head>
+
+<body>
+  <header>
+    <h1>Homework 8 - JavaScript/AJAX</h1>
+  </header>
+
+  <main class="content">
+    
+    <button type="button" onclick="loadDoc()">Get CD collection</button>
+    <br><br>
+    <table id="demo"></table>
+    <br>
+    <a href="index.html">Return to main page</a>
+
+<script>
+function loadDoc() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    myFunction(this);
+  }
+  xhttp.open("GET", "cd_catalog.xml");
+  xhttp.send();
+}
+function myFunction(xml) {
+  const xmlDoc = xml.responseXML;
+  const x = xmlDoc.getElementsByTagName("CD");
+  let table="<tr><th>Artist</th><th>Title</th></tr>";
+  for (let i = 0; i <x.length; i++) { 
+    table += "<tr><td>" +
+    x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+    "</td><td>" +
+    x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+    "</td></tr>";
+  }
+  document.getElementById("demo").innerHTML = table;
+}
+</script>
+<h2>Explanation of AJAX</h2>
+<p>
+  <ul>
+    The JS code in this html file is designed to fetch and parse an XML document called "cd_catalog.xml" and display the content in an HTML table.
+  </ul>
+</p>
+<p>
+  <h3>The loadDoc() function initializes the process of fetching the XML file.</h3>
+  <ul>"const xhttp = new XMLHttpRequest();" creates a new XMLHttpRequest object to send an HTTP request</ul>
+  <ul>"xhttp.onload = function() {myFunction(this); }" defines a callback function that is executed when the HTTP request is successfully completed.</ul>
+  <ul>The "this" keyword referes to the "XMLHttpRequest" object, which is passed to "myFunction".</ul>
+  <ul>"xhttp.open("GET", "cd_catalog.xml");" configures the "XMLHttpRequest" object to make a "GET" request to fetch the "cd_catalog.xml" file. </ul>
+  <ul>"xhttp.send();" sends the HTTP request.</ul>
+</p>
+<p>
+  <h3>The "myFunction(xml)" function processes the XML response and creates a HTML table.</h3>
+  <ul>"const xmlDoc = xml.responseXML;" extracts the XML document object from the HTTP response "(responseXML)". </ul>
+  <ul>"const x = xmlDoc.getElementsByTagName("CD");" retrieves all "CD" elements from the XML document. This creats a collection of XML nodes.</ul>
+  <ul>"let table" variable initializes an HTML string for the table, including the header row with columns for "Artist" and "Title". </ul>
+  <ul>The "for" loop will loop through all the "CD" elements. </ul>
+  <ul>"x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue" retrieves the text value of the "ARTIST" element inside the current "CD" element. The "[0]" ensures that it accesses the first (and ONLY) "ARTIST" tage for the "CD". The "childNodes[0]" extracts the text content. </ul>
+  <ul>"x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue" similarily retrieves the text value of the "TITLE" element insdie the current "CD" element. </ul>
+  <ul>"table += ..." appends a new row to the table with the artist and title information.</ul>
+  <ul>"document.getElementById("demo").innerHTML = table" updates the content of the HTML element with the ID "demo" to display the table. </ul>
+</p>
+<h2>REST API</h2>
+  <p>
+    <h3>The geoPlugin API</h3>
+    <ul>
+    This API allows the developer to directly program their backend JSON scripts to deliver dynamic geo-localized pages using the JSON variables provided by geoPlugin.
+    geoPlugin provides the developer with IP Geolocation to enhance the experience of their website designs without the need to perform any installation. The goal of geoPlugin is to make geolocation services accessible to all.
+    The geoPlugin API has been providing stable, fast, reliable and free IP geolocation and currency conversion since 2006. The only caveat is they request that you provide some recognition to their API at the foot of your webpage.
+    Registering for the geoPlugin API is not required, but recommended as it allows for them to contact you in case there are any changes to their services. Since the web service is currently free, registering your webpage will allow the service to remain free in case there are changes in the future that require payment. geoPlugin API promises they have not given their user's email to third-party sites and will not do so in the future.
+    </ul>
+  </p>
+  <p>
+    <ul>
+      The APIs offered by geoPlugin are flexible for developers - they can be used in the back-end scripts or front-end HTML pages.
+      The services are based on JavaScript, PHP, JSON, XML, ASP, or CSV. All of the services will return the same data, but will be presented to your specific needs.
+      The visitor data returned by the geoPlugin services provides you all you need to know about your visitor. 
+      The data returned by the web services shows: city, region, area code, DMA code, 2-Letter ISO 3166 Country Code, country name, 2-Letter Continent Code, whether they are located in the EU, continent code, latitude, longitude, 3-Letter Currency Code, HTML Currency symbol, and currency exchange rate.
+      IP geolocation is reliable for geolocating an IP to a country, but geolocation for the correct city might be less reliable for certain IPs, for example those distributed by mobile operators.
+      In order to provide the accuracy, the API will contain a variable that contains an estimation (in miles) of the radius of the geolocalised city.
+      In addition to the IP geolocation service, there is a reverse IP geocoding web service API that will find nearby places based on latitude/longitude coordinates.
+    </ul>
+    <ul>
+      <a href="https://www.geoplugin.com/quickstart">Click here to view the geoPlugin Quick Start guide...</a>
+    </ul>
+  </p>
+</main>
+
+<footer>
+  <a>&copy;Aakash Khalasi, College of San Mateo 2024</a>
+</footer>
+
+</body>
+</html>
